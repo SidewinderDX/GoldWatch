@@ -1,38 +1,18 @@
 import pygame
+
+import tools
 pygame.init()
 pygame.display.set_caption("GoldWatch - The Game")
 
 win = pygame.display.set_mode((500,500))
 clock = pygame.time.Clock()
 
-def makeSprite(file, n):
-    """
-    n = Amount of pictures in the row for animation
-    """
-    img = pygame.image.load(file)
-    orgWidth = img.get_width() // n
-    orgHeight = img.get_height()
-    img = img.convert_alpha()
-
-    images = []
-
-    frames = pygame.Surface((orgWidth, orgHeight), pygame.SRCALPHA, 32)
-    x = 0
-    for frame in range(n):
-        frames = pygame.Surface((orgWidth, orgHeight), pygame.SRCALPHA, 32)
-        frames.blit(img, (x,0))
-        images.append(frames.copy())
-        x -= orgWidth
-    return images
-
-
-
 # Loading all relevant sprites
-ship = makeSprite("sprites/PirateShip.png", 1)
-pirate1 = makeSprite("sprites/Pirate1_walk.png", 12)
-pirate1Idle = makeSprite("sprites/Pirate1_Idle.png", 6)
-water1 = makeSprite("sprites/waterBG_1.png",1)
-water2 = makeSprite("sprites/waterBG_2.png",1)
+ship = tools.makeSprite("sprites/PirateShip.png", 1)
+pirate1 = tools.makeSprite("sprites/Pirate1_walk.png", 12)
+pirate1Idle = tools.makeSprite("sprites/Pirate1_Idle.png", 6)
+water1 = tools.makeSprite("sprites/waterBG_1.png",1)
+water2 = tools.makeSprite("sprites/waterBG_2.png",1)
 water = False
 waterCount = 0
 x = 50
@@ -79,3 +59,8 @@ while run:
     waterCount += 1
 
 pygame.quit()
+
+"""
+Beim erstellen bzw. anzeigen der Bilder muss auf die Framerate geachtet werden um eine flüssige Animation zu bekommen
+
+"""
