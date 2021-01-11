@@ -48,6 +48,7 @@ if __name__ == "__main__":
     water1 = tools.makeSprite("sprites/waterBG_1.png",1)
     water2 = tools.makeSprite("sprites/waterBG_2.png",1)
     speechBubble = tools.makeSprite("sprites/speech_bubble.png", 1)
+    village = tools.makeSprite("sprites/village.png", 1)
     x = 50
     y = 50
     width = 40
@@ -73,13 +74,17 @@ if __name__ == "__main__":
         if keys[pygame.K_DOWN] and y < 500 - height - vel:
             y += vel
 
-        win.blit(pirate1Idle[idle], (x,y))
+        
         if idle < 5:
             idle += 1
         else:
             idle = 0
         # pygame.draw.rect(win, (255, 0, 0), (x,y,width,height))
-        intro()
+        if waterCount < 550:
+            intro()
+        else:
+            win.blit(village[0], (0,0))
+            win.blit(pirate1Idle[idle], (x,y))
         pygame.display.update()
 
     pygame.quit()
